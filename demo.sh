@@ -39,11 +39,11 @@ pe "cat ./Dockerfile"
 
 pe "docker build -t kcduk-alpine:latest ."
 
-pe "docker tag kcduk-alpine:latest  ghcr.io/lukehinds/kcduk-alpine:latest"
+pe "docker tag kcduk-alpine:latest ghcr.io/lukehinds/kcduk-alpine:latest"
 
 pe "docker push ghcr.io/lukehinds/kcduk-alpine:latest"
 
-pe "open  -a \"Google Chrome\" https://github.com/users/lukehinds/packages/container/kcduk-alpine/settings"
+pe "open -a \"Google Chrome\" https://github.com/users/lukehinds/packages/container/kcduk-alpine/settings"
 
 pe "kubectl run kcduk-alpine --image=ghcr.io/lukehinds/kcduk-alpine:latest"
 
