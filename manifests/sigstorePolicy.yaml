@@ -1,0 +1,31 @@
+apiVersion: policy.sigstore.dev/v1beta1
+kind: ClusterImagePolicy
+metadata:
+  name: sigstore-demo
+spec:
+  images:
+  - glob: "**"
+  authorities:
+  - name: keylessluke
+    keyless:
+      identities:
+      - issuer: https://accounts.google.com
+        subject: lhinds@sigstore.VOID
+  - name: keylessactions
+    keyless:
+      identities:
+      - issuer: https://token.actions.githubusercontent.com
+        subjectRegExp: "https://github.com/lukehinds/cosign-keyless-action/.github/workflows/build-push-sign.yml*"
+  policy:
+    type: cue
+    data: |
+      package sigstore
+      import "list"
+      authorityMatches: {
+        keylessactions: {
+          signatures: list.MaxItems(1) & list.MinItems(1)
+        },
+        keylessluke: {
+            signatures: list.MaxItems(1) & list.MinItems(1)
+        }
+      }
