@@ -11,7 +11,7 @@ clear
 
 pe "open -a \"Google Chrome\" https://github.com/lukehinds/kcduk_sigstore"
 
-pei "open -a \"Google Chrome\" https://github.com/lukehinds/kdcuk_sigstore"
+pe "open -a \"Google Chrome\" https://github.com/lukehinds/kdcuk_sigstore"
 
 pe "# export log_id from GitHub Action"
 
