@@ -1,2 +1,2 @@
-# Kubernetes Community Days Demo
+# Type Demo
 

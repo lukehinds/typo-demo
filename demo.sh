@@ -9,9 +9,9 @@ DEMO_PROMPT="${GREEN}➜ ${CYAN}\W "
 
 clear
 
-pe "open -a \"Google Chrome\" https://github.com/lukehinds/kcduk_sigstore"
+pe "open -a \"Google Chrome\" https://github.com/lukehinds/favorite-json"
 
-pe "open -a \"Google Chrome\" https://github.com/lukehinds/kdcuk_sigstore"
+pe "open -a \"Google Chrome\" https://github.com/lukehinds/favourite-json"
 
 pe "# export log_id from GitHub Action"
 
@@ -21,37 +21,37 @@ pe "rekor-cli get --log-index=$log_id --format=json | jq \".Body | .HashedRekord
 
 pe "openssl x509 -in cert-action.pem -text -noout"
 
-pe "kubectl get all -n kcduk-demo"
+pe "kubectl get all -n typo-demo"
 
 pe 'tail -n 30 manifests/imagePolicy.yaml'
 
-pe "kubectl apply -f manifests/imagePolicy.yaml --namespace kcduk-demo"
+pe "kubectl apply -f manifests/imagePolicy.yaml --namespace typo-demo"
 
-pe "kubectl run bad-image --image=ghcr.io/lukehinds/kdcuk_sigstore:main"
+pe "kubectl run bad-image --image=ghcr.io/lukehinds/favourite-json:main"
 
 pe "kubectl run nginx --image=nginx:latest"
 
-pe "kubectl run good-image --image=ghcr.io/lukehinds/kcduk_sigstore:main"
+pe "kubectl run good-image --image=ghcr.io/lukehinds/favorite-json:main"
 
 pe "kubectl get pod good-image"
 
 pe "cat ./Dockerfile"
 
-pe "docker build -t kcduk-alpine:latest ."
+pe "docker build -t typo-alpine:latest ."
 
-pe "docker tag kcduk-alpine:latest ghcr.io/lukehinds/kcduk-alpine:latest"
+pe "docker tag typo-alpine:latest ghcr.io/lukehinds/typo-alpine:latest"
 
-pe "docker push ghcr.io/lukehinds/kcduk-alpine:latest"
+pe "docker push ghcr.io/lukehinds/typo-alpine:latest"
 
-pe "open -a \"Google Chrome\" https://github.com/users/lukehinds/packages/container/kcduk-alpine/settings"
+pe "open -a \"Google Chrome\" https://github.com/users/lukehinds/packages/container/typo-alpine/settings"
 
-pe "kubectl run kcduk-alpine --image=ghcr.io/lukehinds/kcduk-alpine:latest"
+pe "kubectl run typo-alpine --image=ghcr.io/lukehinds/typo-alpine:latest"
 
 pe "tail -n 30 manifests/imagePolicy-email.yaml"
 
-pe "kubectl apply -f manifests/imagePolicy-email.yaml --namespace kcduk-demo"
+pe "kubectl apply -f manifests/imagePolicy-email.yaml --namespace typo-demo"
 
-pe "cosign sign ghcr.io/lukehinds/kcduk-alpine:latest"
+pe "cosign sign ghcr.io/lukehinds/typo-alpine:latest"
 
 pe "# log_id from GitHub Cosign"
 
@@ -61,21 +61,21 @@ pe "rekor-cli get --log-index=$log_id --format=json | jq \".Body | .HashedRekord
 
 pe "openssl x509 -in cert-email.pem -text -noout"
 
-pe "kubectl run kcduk-alpine --image=ghcr.io/lukehinds/kcduk-alpine:latest"
+pe "kubectl run typo-alpine --image=ghcr.io/lukehinds/typo-alpine:latest"
 
 pe "kubectl delete pod good-image"
 
-pe "kubectl delete pod kcduk-alpine"
+pe "kubectl delete pod typo-alpine"
 
 pe "# Yay! We made it through the demo! <applause!>"
 
 # pe "tail -n 30 manifests/imagePolicy-email.yaml"
 
-# pe "kubectl apply -f manifests/imagePolicy-email.yaml --namespace kcduk-demo"
+# pe "kubectl apply -f manifests/imagePolicy-email.yaml --namespace typo-demo"
 
-# pe "kubectl run good-image --image=ghcr.io/lukehinds/kcduk_sigstore:main"
+# pe "kubectl run good-image --image=ghcr.io/lukehinds/favorite-json:main"
 
-# pe "cosign sign ghcr.io/lukehinds/kcduk_sigstore:main"
+# pe "cosign sign ghcr.io/lukehinds/favorite-json:main"
 
 # p "# log_id from email"
 
@@ -85,6 +85,6 @@ pe "# Yay! We made it through the demo! <applause!>"
 
 # pe "openssl x509 -in cert-email.pem -text -noout"
 
-# pe "kubectl run good-image --image=ghcr.io/lukehinds/kcduk_sigstore:main"
+# pe "kubectl run good-image --image=ghcr.io/lukehinds/favorite-json:main"
 
 # pe "kubectl delete pod good-image"

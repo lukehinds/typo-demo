@@ -1,6 +1,6 @@
 name: cosign-keyless-action
 
 image:
-  repository: ghcr.io/lukehinds/kcduk_sigstore
+  repository: ghcr.io/lukehinds/favorite-json
   # ghcr.io/lukehinds/sigstore-nginx:latest
   tag: main
